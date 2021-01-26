@@ -1,0 +1,38 @@
+.main-container {
+  min-width: 800px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+h1, .h1, h2, .h2 {
+  margin-top: 54px;
+}
+
+div {
+  font-size: 13pt;
+}
+.task {
+  font-size: 15pt;
+  color: green;
+}
+.note {
+  font-size:14pt;
+  font-weight: bold;
+  color: purple;
+}
+
+.exer {
+  font-size:14pt;
+  font-weight: bold;
+  color: darkorange;
+}
+
+div code {
+  color: green;
+}
+
+caption {
+  font-size: 0.9em;
+  font-style: italic;
+  color: black;
+}
