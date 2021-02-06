@@ -1,29 +1,39 @@
 ---
 title: "Linear Algebra Step by Step"
-author: "Rick Dean"
-date: "12/15/2019"
-output: 
+output:
   html_document:
     toc: yes
     toc_depth: 3
     css: ../style.css
+params:
+  date: !r Sys.Date()
 ---
-```{r}
-library(pracma)
-library(matlib)
-library(Rplot2dPkg)
-```
 
 ```{r,setup, include=FALSE, eval=TRUE}
 options(knitr.table.format = "html")
 knitr::opts_chunk$set(echo = TRUE, results="as-is", collapse=TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6)
 ```
+
+<div>Author: Rick Dean</div>
+<div>Article date: `r params$date`</div>
+
+<div class="abstract">
+  <p class="abstract">Abstract</p>
+  This document provides notes, R scripts, and plots to the text [Linear Algebra Step by Step](https://global.oup.com/booksites/content/9780199654444/) by Kuldeep Signh. The following is based on Chapter 1 "Linear Equations and Matrices".
+</div> 
+
+```{r, message=FALSE}
+library(pracma)
+library(matlib)
+library(Rplot2dPkg)
+```
+
 # 1 Linear Equations and Matrices
 
 ## 1.1 Systems of Linear Equations (page 1)
 
 ### 1.1.2 System of linear equations
-<div class="task">Task: Plot 3 linear equations (from page 6) . </div>
+<div class="task">Task: Plot 3 linear equations (from page 6). </div>
 1. Create the equations:
 
 ```{r}
