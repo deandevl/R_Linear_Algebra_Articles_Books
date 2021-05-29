@@ -11,7 +11,7 @@ params:
 
 ```{r,setup, include=FALSE, eval=TRUE}
 options(knitr.table.format = "html")
-knitr::opts_chunk$set(echo = TRUE, results="as-is", collapse=TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6)
+knitr::opts_chunk$set(echo = TRUE, results="as-is", collapse=TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 10)
 ```
 
 <div>Author: Rick Dean</div>
@@ -23,9 +23,8 @@ knitr::opts_chunk$set(echo = TRUE, results="as-is", collapse=TRUE, message = FAL
 </div> 
 
 ```{r, message=FALSE}
-library(pracma)
 library(matlib)
-library(Rplot2dPkg)
+library(RmatrixPkg)
 ```
 
 # 1 Linear Equations and Matrices
@@ -37,16 +36,21 @@ library(Rplot2dPkg)
 1. Create the equations:
 
 ```{r}
-A <- matrix(c(1,2,4,  3,7,2,  2,3,3), ncol = 3, byrow = T)
-b <- c(7, -11, 1)
+A <- rbind(c(1,  2,  4),
+           c(3,  7,  2),
+           c(2,  3,  3))
+b <- cbind(c(7, -11, 1))
 matlib::showEqn(A = A, b = b, vars = c("x", "y", "z"))
 ```
 ## 1.2 Gaussian Elimination (page 12)
 <div class="task">Task:  Solve the following set of equations by Gaussian Elimination (page 16 Example 1.7).</div>
 
 ```{r}
-A <- matrix(c(1,-3,5,  2,-1,-3,  3,1,4), ncol = 3,  byrow = T)
-b <- c(-9,19,-13)
+A <- rbind(c(1,  -3,   5),
+           c(2,  -1,  -3),
+           c(3,   1,   4))
+b <- cbind(c(-9,19,-13))
+
 matlib::showEqn(A = A, b = b, vars = c("x", "y", "z"))
 ```
 1. Use matlib:: row operations:
@@ -67,10 +71,14 @@ matlib::showEqn(A = A, b = b, vars = c("x", "y", "z"))
 ### 1.3.3 Vectors in R2 (page 30)
 <div class="task">Task: Plot a set of vectors in R2 space (page 31). </div>
 
-```{r, fig.width=10, fig.height=10}
+```{r}
 to_vectors <- rbind(c(2,3), c(7,5), c(-1,5), c(-6,-3))
 to_labels <- c("(2,3)", "(7,5)", "(-1,5)", "(-6,-3)")
-Rplot2dPkg::plot_vector_2d(to = to_vectors, to_labels = to_labels, x_breaks = c(-6,8,2), y_breaks = c(-4,6,2))
+RmatrixPkg::plot_vector_2d(
+  to = to_vectors, 
+  vector_labels = to_labels, 
+  x_breaks = c(-6,8,2), 
+  y_breaks = c(-4,6,2))
 ```
 <div class="task">Task: Plot the sum of two vectors (page 32 Example 1.10) </div>
 
@@ -81,7 +89,9 @@ v3 <- v1 + v2
 
 to_vectors <- rbind(v1,v2,v3)
 to_labels <- c("(3,-1)", "(-2,3)", "(1,2)")
-Rplot2dPkg::plot_vector_2d(to = to_vectors, to_labels = to_labels)
+RmatrixPkg::plot_vector_2d(
+  to = to_vectors, 
+  vector_labels = to_labels)
 
 ```
 <div class="task">Task: Multiple vectors by a scalar (page 32, Example 1.11) </div>
@@ -95,18 +105,19 @@ v4 <- -1 * v
 
 to_vectors <- rbind(v1,v2,v3,v4)
 to_labels <- c(".5v", "2v", "3v", "-1v")
-Rplot2dPkg::plot_vector_2d(to = to_vectors, to_labels = to_labels, x_breaks = c(-4,10,2))
+RmatrixPkg::plot_vector_2d(
+  to = to_vectors, 
+  vector_labels = to_labels, 
+  x_breaks = c(-4,10,2))
 ```
 
 ### 1.3.6 Introduction to the dot(inner) product
 
 ```{r}
-u <-  c(-3,1,7)
-v <- c(9,2,-4)
-uv_dot <- pracma::dot(u,v)
+u <-  cbind(c(-3,1,7))
+v <- cbind(c(9,2,-4))
+uv_dot <- RmatrixPkg::dot(v1 = u, v2 = v)
+uv_dot
 ```
+$\textbf{u} \cdot \textbf{v}$ = `r uv_dot`
 
-```{r}
-A <- matrix(c(1,1,1,0,0,0,15,  0,0,0,1,1,1,6,  1,0,0,1,0,0,8,  0,1,0,0,1,0,7, 0,0,1,0,0,1,6), nrow = 5, ncol = 7, byrow = T)
-A_re <- pracma::rref(A)
-```
